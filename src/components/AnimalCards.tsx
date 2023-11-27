@@ -5,7 +5,7 @@ import { AnimalCharacteristicsModal } from "./AnimalCharacteristicsModal";
 import { apiResponse } from "../types";
 
 export const AnimalCards = ({ animals = [], updateAnimalRating, updateAnimalCharacteristicsLikeDislike }: {
-    animals: apiResponse[],
+    animals?: apiResponse[],
     updateAnimalRating: Function,
     updateAnimalCharacteristicsLikeDislike: Function
 }) => {
@@ -24,6 +24,7 @@ export const AnimalCards = ({ animals = [], updateAnimalRating, updateAnimalChar
 
                     return (
                         <Card
+                            data-testid="animalCard"
                             onClick={() => onAnimalClick(name, characteristics, animalIndex)}
                             key={name}
                             title={name}
@@ -34,7 +35,7 @@ export const AnimalCards = ({ animals = [], updateAnimalRating, updateAnimalChar
                     )
                 })}
             </div>
-            {openDialog && <AnimalCharacteristicsModal
+            {openDialog && animalSelected?.characteristics && <AnimalCharacteristicsModal
                 isOpen={openDialog}
                 setIsOpen={setOpenDialog}
                 info={animalSelected?.characteristics}

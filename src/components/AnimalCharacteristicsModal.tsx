@@ -10,10 +10,10 @@ import { FontAwesomeIconButton } from "./common/IconButton";
 export const AnimalCharacteristicsModal = ({ setAnimalSelected, animalIndex, animalName = "", info = {}, isOpen = false, setIsOpen = () => { }, updateAnimalCharacteristicsLikeDislike }: {
     setAnimalSelected: Function,
     animalIndex: number,
-    animalName: string,
-    isOpen: boolean,
-    info: Object,
-    setIsOpen: Function,
+    animalName?: string,
+    isOpen?: boolean,
+    info?: Object,
+    setIsOpen?: Function,
     updateAnimalCharacteristicsLikeDislike: Function
 }) => {
     const handleLikeDislike = (index: number, characteristic: string, like: boolean) => {
@@ -38,15 +38,15 @@ export const AnimalCharacteristicsModal = ({ setAnimalSelected, animalIndex, ani
                 <tr key={i}>
                     <td>{i}</td>
                     <td>{info[i]?.value}</td>
-                    <td onClick={() => handleLikeDislike(animalIndex, i, true)}><FontAwesomeIconButton fill={info[i]?.like} icon="fa-thumbs-up" /></td>
-                    <td onClick={() => handleLikeDislike(animalIndex, i, false)}><FontAwesomeIconButton fill={!info[i]?.like} icon="fa-thumbs-down" /></td>
+                    <td data-testid="thumbs-up" onClick={() => handleLikeDislike(animalIndex, i, true)}><FontAwesomeIconButton fill={info[i]?.like} icon="fa-thumbs-up" /></td>
+                    <td data-testid="thumbs-down" onClick={() => handleLikeDislike(animalIndex, i, false)}><FontAwesomeIconButton fill={!info[i]?.like} icon="fa-thumbs-down" /></td>
                 </tr>
             )
         })
     }
 
     return (
-        <Dialog open={isOpen} handler={() => setIsOpen(false)}>
+        <Dialog data-testid="animal-characteristics-modal" open={isOpen} handler={() => setIsOpen(false)}>
             <DialogHeader>
                 {`${animalName} Characteristics`}
             </DialogHeader>
@@ -71,6 +71,7 @@ export const AnimalCharacteristicsModal = ({ setAnimalSelected, animalIndex, ani
                 <Button
                     variant="text"
                     color="red"
+                    data-testid="dialog-cancel"
                     onClick={() => setIsOpen(false)}
                     className="mr-1"
                 >

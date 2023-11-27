@@ -4,7 +4,7 @@ export interface apiResponse {
         [key: string]: string
     },
     locations: string[],
-    rating: number,
+    rating?: number,
     characteristics: {
         [key: string]: string
     }

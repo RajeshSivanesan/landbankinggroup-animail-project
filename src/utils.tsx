@@ -36,7 +36,7 @@ export const transformApiResponse = (response: apiResponse[]) => {
                 //@ts-ignore
                 acc[value] = {
                     value: data.characteristics[value],
-                    like: true
+                    like: false
                 }
                 return acc;
             }, {})
