@@ -81,3 +81,9 @@ To run the tests:
 ```shell
   npm run test
 ```
+
+To run the tests with coverage:
+
+```shell
+  npm run test:coverage
+```
