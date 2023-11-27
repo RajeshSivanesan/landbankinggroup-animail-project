@@ -1,30 +1,80 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Animal Rating / Characteristics Like / Dislike
+Website used for displaying the animal where we can display the rating
+and like / dislike a characteristics
 
-Currently, two official plugins are available:
+## Tech stack
+ - React / Typescript / Javascript
+ - react-testing-library
+ - jest / React testing library
+ - Redux / Redux Saga / Redux toolkit
+ - Tailwind CSS (tried)
+ - Vite (setup / configuration)
+ - Local Storage
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Screenshots
 
-## Expanding the ESLint configuration
+![Alt text](image.png)
+![Alt text](image-1.png)
+![Alt text](image-2.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Important Details
 
-- Configure the top-level `parserOptions` property like this:
+1. Actual time taken to complete start to finish
+-- 4 hrs
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+2. Thought process
+-- Took some time to finalize the ui
+-- Wanted to do it simpler and easier to maintain
+-- Known bugs (localstorage was not updated when rating / like / dislike change).
+-- Wishlist
+  1. Show a navbar with fav icon
+  2. On clicking tag all highly rated animals there
+  3. Add provision to support more animals (scalable ui)
+  4. UX can be improved a bit
+
+### Running the app locally
+
+To run the app, follow these steps.
+
+1. Ensure that [NodeJS](http://nodejs.org/) is installed.
+2. From the project folder, execute the following commands:
+
+To clone the project
+```shell
+  git clone git@github.com:RajeshSivanesan/landbankinggroup-animail-project.git
+  OR
+  git clone https://github.com/RajeshSivanesan/landbankinggroup-animail-project.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Move to the directory
+```shell
+  cd landbankinggroup-animail-project
+```
+
+To install dependencies:
+```shell
+  npm install
+```
+
+To run the app:
+
+```shell
+  npm run dev
+```
+
+To launch the ui:
+
+```shell
+  Please check the url which prints post npm run dev
+  Default - http://localhost:5173/
+  If the port is busy, it will pick the next one - 5174
+  so always keep an eye on the port number
+```
+
+To run the tests:
+
+```shell
+  npm run test
+```
