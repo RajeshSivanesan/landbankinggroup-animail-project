@@ -1,6 +1,6 @@
 import { ANIMALS_LIST } from "../utils"
 
-export const AnimalsList = ({ selectedAnimal, setSelectedAnimal }: any) => {
+export const AnimalsList = ({ selectedAnimal, setSelectedAnimal }: { selectedAnimal: string, setSelectedAnimal: Function }) => {
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedAnimal(event.target.value);
     }

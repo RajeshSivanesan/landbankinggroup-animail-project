@@ -1,47 +1,62 @@
 import { useState, useEffect } from 'react';
 import './App.css'
 import { AnimalsList } from './components/AnimalsList'
-import { Card } from './components/common/Card'
-import { Rating } from './components/common/Rating'
 import { AnimalCards } from './components/AnimalCards';
 import { transformApiResponse } from './utils';
+import { Header } from './components/Header';
+import { checkForCacheAndInvokeApi } from './api';
+import { apiResponse } from './types';
 
 function App() {
   const [selectedAnimal, setSelectedAnimal] = useState("");
-  const [apiResult, setApiResult] = useState([]);
+  const [apiResult, setApiResult] = useState<apiResponse[]>([]);
+  const [apiError, setApiError] = useState("");
 
   useEffect(() => {
     if (selectedAnimal) {
-      fetch(`${import.meta.env.VITE_API_URL}${selectedAnimal}`, {
-        method: "GET",
-        headers: {
-          //@ts-ignore
-          "X-Api-Key": import.meta.env.VITE_API_KEY
+      checkForCacheAndInvokeApi(selectedAnimal, (response: apiResponse[], err: string) => {
+        if (err) {
+          setApiError(err);
+          return;
         }
+        setApiResult(transformApiResponse(response));
       })
-        .then((response) => response.json())
-        .then((response) => {
-          console.log(response);
-          setApiResult(transformApiResponse(response));
-        })
-        .catch((err) => {
-          console.log(err);
-        })
     }
   }, [selectedAnimal]);
 
+  const updateAnimalRating = (index: number, rating: number) => {
+    const copyApiResult: apiResponse[]  = [...apiResult];
+    copyApiResult[index] = {
+      ...copyApiResult[index],
+      rating
+    }
+    setApiResult(copyApiResult);
+  };
+
+  const updateAnimalCharacteristicsLikeDislike = (index: number, characteristic: string, like: boolean) => {
+    const copyApiResult: apiResponse[] = [...apiResult];
+    copyApiResult[index].characteristics = {
+      ...copyApiResult[index].characteristics,
+      [characteristic]: {
+        //@ts-ignore
+        ...(copyApiResult[index].characteristics[characteristic]),
+        like
+      }
+    }
+    setApiResult(copyApiResult);
+  }
+
   return (
     <div>
-      <h1 className="font-bold underline text-xl">
-        Animals - Characteristics
-      </h1>
-      <div style={{ marginTop: "20px" }}></div>
-      <p>
-        Animals are multicellular eukaryotes that lack cell walls. All animals are heterotrophs. Animals have sensory organs, the ability to move, and internal digestion.
-      </p>
+      <Header />
       <AnimalsList selectedAnimal={selectedAnimal} setSelectedAnimal={setSelectedAnimal} />
-      <p>Select any animal to display its characteristics below</p>
-      <AnimalCards animals={apiResult} />
+      {apiError && <p>Error: {apiError}</p>}
+      {!apiError && (
+        <>
+          <p>Select any animal to display its characteristics below</p>
+          <AnimalCards updateAnimalRating={updateAnimalRating} updateAnimalCharacteristicsLikeDislike={updateAnimalCharacteristicsLikeDislike} animals={apiResult} />
+        </>
+      )}
     </div>
   )
 }

@@ -7,15 +7,39 @@ import {
 } from "@material-tailwind/react";
 import { FontAwesomeIconButton } from "./common/IconButton";
 
-export const AnimalCharacteristicsModal = ({ animalName = "", info = {}, isOpen = false, setIsOpen = () => { } }: any) => {
+export const AnimalCharacteristicsModal = ({ setAnimalSelected, animalIndex, animalName = "", info = {}, isOpen = false, setIsOpen = () => { }, updateAnimalCharacteristicsLikeDislike }: {
+    setAnimalSelected: Function,
+    animalIndex: number,
+    animalName: string,
+    isOpen: boolean,
+    info: Object,
+    setIsOpen: Function,
+    updateAnimalCharacteristicsLikeDislike: Function
+}) => {
+    const handleLikeDislike = (index: number, characteristic: string, like: boolean) => {
+        updateAnimalCharacteristicsLikeDislike(index, characteristic, like);
+        setAnimalSelected({
+            name: animalName, 
+            characteristics: {
+                ...info,
+                [characteristic]: {
+                    //@ts-ignore
+                    ...info[characteristic],
+                    like
+                }
+            },
+            animalIndex
+        })
+    }
+
     const renderCharacteristics = (info: any) => {
         return Object.keys(info).map(i => {
             return (
                 <tr key={i}>
                     <td>{i}</td>
                     <td>{info[i]?.value}</td>
-                    <td><FontAwesomeIconButton fill={info[i]?.like} icon="fa-thumbs-up" /></td>
-                    <td><FontAwesomeIconButton fill={!info[i]?.like} icon="fa-thumbs-down" /></td>
+                    <td onClick={() => handleLikeDislike(animalIndex, i, true)}><FontAwesomeIconButton fill={info[i]?.like} icon="fa-thumbs-up" /></td>
+                    <td onClick={() => handleLikeDislike(animalIndex, i, false)}><FontAwesomeIconButton fill={!info[i]?.like} icon="fa-thumbs-down" /></td>
                 </tr>
             )
         })
@@ -26,8 +50,8 @@ export const AnimalCharacteristicsModal = ({ animalName = "", info = {}, isOpen 
             <DialogHeader>
                 {`${animalName} Characteristics`}
             </DialogHeader>
+            <p style={{ textAlign: "center", marginBottom: 10 }}>We can like / dislike an animal characteristic</p>
             <DialogBody>
-                We can like / dislike an animal characteristic
 
                 <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
                     <table cellPadding={10} cellSpacing={15} className="table-auto">

@@ -1,3 +1,5 @@
+import { apiResponse } from "./types"
+
 export const ANIMALS_LIST = [
     {
         name: "Cheetah",
@@ -25,12 +27,12 @@ export const ANIMALS_LIST = [
     }
 ]
 
-export const transformApiResponse = (response: any) => {
-    const result = response.map((data: any) => {
+export const transformApiResponse = (response: apiResponse[]) => {
+    const result = response.map((data: apiResponse) => {
         return {
             ...data,
-            rating: 1,
-            characteristics: Object.keys(data.characteristics)?.reduce((acc, value): any => {
+            rating: 0,
+            characteristics: Object.keys(data.characteristics)?.reduce((acc, value) => {
                 //@ts-ignore
                 acc[value] = {
                     value: data.characteristics[value],
@@ -41,6 +43,5 @@ export const transformApiResponse = (response: any) => {
         }
     })
     
-    console.log(result);
     return result;
 }
