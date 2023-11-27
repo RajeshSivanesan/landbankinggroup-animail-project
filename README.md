@@ -18,6 +18,7 @@ and like / dislike a characteristics
 ![Alt text](image.png)
 ![Alt text](image-1.png)
 ![Alt text](image-2.png)
+![Alt text](image-3.png)
 
 ## Important Details
 
@@ -27,8 +28,9 @@ and like / dislike a characteristics
 2. Thought process
 -- Took some time to finalize the ui
 -- Wanted to do it simpler and easier to maintain
--- Known bugs (localstorage was not updated when rating / like / dislike change).
--- Wishlist
+-- Known bugs (localstorage was not updated when rating / like / dislike change)
+
+3. Wishlist
   1. Show a navbar with fav icon
   2. On clicking tag all highly rated animals there
   3. Add provision to support more animals (scalable ui)
