@@ -12,6 +12,7 @@ and like / dislike a characteristics
  - Tailwind CSS (tried)
  - Vite (setup / configuration)
  - Local Storage
+ - Responsive ui
 
 ## Screenshots
 
