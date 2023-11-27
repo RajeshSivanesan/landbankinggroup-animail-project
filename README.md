@@ -31,10 +31,10 @@ and like / dislike a characteristics
 -- Known bugs (localstorage was not updated when rating / like / dislike change)
 
 3. Wishlist
-  1. Show a navbar with fav icon
-  2. On clicking tag all highly rated animals there
-  3. Add provision to support more animals (scalable ui)
-  4. UX can be improved a bit
+Show a navbar with fav icon
+On clicking tag all highly rated animals there
+Add provision to support more animals (scalable ui)
+UX can be improved a bit
 
 ### Running the app locally
 
