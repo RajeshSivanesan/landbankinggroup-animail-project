@@ -50,10 +50,10 @@ export const AnimalCharacteristicsModal = ({ setAnimalSelected, animalIndex, ani
             <DialogHeader>
                 {`${animalName} Characteristics`}
             </DialogHeader>
-            <p style={{ textAlign: "center", marginBottom: 10 }}>We can like / dislike an animal characteristic</p>
+            <p className="text">We can like / dislike an animal characteristic</p>
             <DialogBody>
 
-                <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
+                <div className="flex-wrap">
                     <table cellPadding={10} cellSpacing={15} className="table-auto">
                         <thead>
                             <tr>
