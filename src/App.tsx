@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import './App.css'
 import { AnimalsList } from './components/AnimalsList'
 import { AnimalCards } from './components/AnimalCards';
-import { transformApiResponse } from './utils';
 import { Header } from './components/Header';
 import { checkForCacheAndInvokeApi } from './api';
 import { apiResponse } from './types';
@@ -19,7 +18,7 @@ function App() {
           setApiError(err);
           return;
         }
-        setApiResult(transformApiResponse(response));
+        setApiResult(response);
       })
     }
   }, [selectedAnimal]);

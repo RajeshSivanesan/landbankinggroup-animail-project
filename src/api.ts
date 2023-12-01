@@ -1,4 +1,5 @@
 import { apiResponse } from "./types";
+import { transformApiResponse } from "./utils";
 const LOCAL_STORAGE_KEY = "animals";
 
 export const callApi = (animal: string, callback: Function) => {
@@ -11,17 +12,18 @@ export const callApi = (animal: string, callback: Function) => {
       })
         .then((response) => response.json())
         .then((response: apiResponse[]) => {
+          const apiResponse = transformApiResponse(response);
           try {
             localStorage.setItem("animals", JSON.stringify({
                 ...JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || String("")),
-                [animal]: response
+                [animal]: apiResponse
             }))
           } catch(ex) {
             localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify({
-                [animal]: response
+                [animal]: apiResponse
             }))
           }
-          callback(response);
+          callback(apiResponse);
         })
         .catch((err) => {
           callback(null, err?.message);
